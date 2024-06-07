@@ -1,0 +1,31 @@
+﻿@model SistemaDeGestionDeEmpleados.Data.EF.Empleado;
+
+<h2 class="display-5 text-center fw-bold">Crear Empleado</h2>
+
+<div class="w-50 mx-auto">
+    <p>@ViewBag.Errors</p>
+    <form asp-action="Crear" method="post">
+        <div class="mb-2">
+            <label asp-for="NombreCompleto" class="form-label">Nombre Completo</label>
+            <input asp-for="NombreCompleto" type="text" class="form-control" />
+            <span asp-validation-for="NombreCompleto" class="text-danger fw-bold"></span>
+        </div>
+
+        <div class="mb-2">
+            <select class="form-select" asp-for="IdSucursal">
+                <option selected disabled>--Seleccione una Sucursal--</option>
+                @foreach (var sucursal in ViewBag.Sucursales)
+                {
+                    <option value="@sucursal.IdSucursal">@sucursal.Direccion</option>
+                }
+            </select>
+            <span asp-validation-for="IdSucursal" class="text-danger fw-bold"></span>
+        </div>
+
+        <input type="submit" class="btn btn-success" value="Crear Empleado" />
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

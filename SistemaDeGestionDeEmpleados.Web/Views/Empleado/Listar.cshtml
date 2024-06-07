@@ -1,0 +1,41 @@
+﻿@model List<SistemaDeGestionDeEmpleados.Data.EF.Empleado>;
+
+<h2 class="display-5 text-center fw-bold">Lista Empleados</h2>
+
+<div class="w-75 mx-auto">
+    <div class="mb-4">
+        <form asp-action="FiltrarPorSucursal" method="post">
+            <div class="d-flex gap-2">
+                <select name="idSucursal" class="form-select">
+                    <option selected disabled>--Seleccione una Sucursal--</option>
+                    @foreach (var sucursal in ViewBag.Sucursales)
+                    {
+                        <option value="@sucursal.IdSucursal">@sucursal.Direccion</option>
+                    }
+                </select>
+
+                <input type="submit" class="btn btn-info" value="Filtrar" />
+            </div>
+        </form>
+    </div>
+
+    <table class="table table-primary">
+        <thead>
+            <tr>
+                <th>Nombre Completo</th>
+                <th>Id Sucursal</th>
+                <th>Direccion Sucursal</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var empleado in Model)
+            {
+                <tr>
+                    <td>@empleado.NombreCompleto</td>
+                    <td>@empleado.IdSucursal</td>
+                    <td>@empleado.IdSucursalNavigation.Direccion</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
